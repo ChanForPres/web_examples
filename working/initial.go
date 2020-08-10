@@ -9,7 +9,6 @@
 package main
 
 import (
-	"fmt"
 	"io/ioutil"
 )
 
@@ -44,12 +43,14 @@ func (p *Page) save() error {
 	return ioutil.WriteFile(filename, p.Body, 0600)
 }
 
-func main() {
-	p1 := &Page{Title: "TestPage", Body: []byte("INSIDE BODY")} //create pagee
-	// save page
-	p1.save()
-	// load page
-	loadPage(p1.Title)
-	// print page body
-	fmt.Println(string(p1.Body))
-}
+//
+//func main() {
+//	p1 := &Page{Title: "TestPage", Body: []byte("INSIDE BODY")} //create pagee
+//	// save page
+//	p1.save()
+//	// load page
+//	loadPage(p1.Title)
+//	// print page body
+//	fmt.Println(string(p1.Body))
+//}
+//
