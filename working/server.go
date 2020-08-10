@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"text/template"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -24,13 +25,18 @@ func editHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		p = &Page{Title: title}
 	}
-	fmt.Fprintf(w, "<h1>Editing %s</h1>"+
-		"<form action=\"/save/%s\" method=\"POST\">"+
-		"<textarea name=\"body\">%s</textarea><br>"+
-		"<input type=\"submit\" value=\"Save\">"+
-		"</form>",
-		p.Title, p.Title, p.Body)
+	// fmt.Fprintf(w, "<h1>Editing %s</h1>"+
+	// 	"<form action=\"/save/%s\" method=\"POST\">"+
+	// 	"<textarea name=\"body\">%s</textarea><br>"+
+	// 	"<input type=\"submit\" value=\"Save\">"+
+	// 	"</form>",
+	// 	p.Title, p.Title, p.Body)
+
+	// use template
+	t, _ := template.ParseFiles("edit.html")
+	t.Execute(w, p)
 }
+
 func main() {
 	http.HandleFunc("/view/", viewHandler)
 	http.HandleFunc("/", handler)
